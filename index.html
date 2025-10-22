@@ -159,13 +159,7 @@
     <section class="panel" id="galeria-2" aria-labelledby="galeria-2-title">
       <h2 id="galeria-2-title">Rutina diaria</h2>
       <p class="muted">Mañana · Tarde · Noche</p>
-
-      <div class="gallery three-centered" role="list" style="
-        display: grid;
-        grid-template-columns: repeat(3, minmax(220px, 1fr));
-        justify-content: center;
-        gap: 1rem;
-      ">
+      <div class="gallery three-centered" role="list">
         <figure class="card" role="listitem" data-orient="portrait">
           <span class="tag">Mañana</span>
           <div class="media">
@@ -191,21 +185,6 @@
         </figure>
       </div>
     </section>
-
-    <!-- Responsive behavior -->
-    <style>
-    @media (max-width: 820px) {
-      .gallery.three-centered {
-        grid-template-columns: repeat(2, minmax(200px, 1fr)) !important;
-      }
-    }
-    @media (max-width: 520px) {
-      .gallery.three-centered {
-        grid-template-columns: 1fr !important;
-      }
-    }
-    </style>
-
 
 
     <!-- Galería: Fin de semana -->
@@ -234,7 +213,6 @@
     </section>
   </main>
 
-  
   <footer>
     <p>eugeneleemusic.com | eugene.lee.el899@yale.edu</p>
   </footer>
