@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eugene | Proyecto Web Personal (Yale)</title>
+    <meta name="description" content="Página personal para presentación en clase: perfil, video y galería con captions en español." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --panel: #111827;
+        --muted: #6b7280;
+        --text: #e5e7eb;
+        --brand: #60a5fa;
+        --ring: 0 0 0 4px rgba(96,165,250,0.35);
+        --radius: 18px;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        color: var(--text);
+        background: linear-gradient(180deg, #0b0f14 0%, #0e1218 100%);
+        letter-spacing: 0.1px;
+      }
+      a { color: var(--brand); text-decoration: none; }
+      a:focus-visible, button:focus-visible, iframe:focus-visible { outline: none; box-shadow: var(--ring); border-radius: 12px; }
+
+      /* Header / Hero */
+      header.hero {
+        position: relative;
+        min-height: 58vh;
+        display: grid;
+        place-items: center;
+        overflow: clip;
+        border-bottom: 1px solid #1f2937;
+      }
+      .hero::before {
+        content: "";
+        position: absolute; inset: 0;
+        background: url('./headshot.jpg') center/cover no-repeat;
+        filter: brightness(0.7) saturate(1.1);
+        transform: scale(1.02);
+      }
+      .hero::after{
+        content:""; position:absolute; inset:0; background: radial-gradient(60% 60% at 50% 40%, rgba(17,24,39,0.0) 0%, rgba(17,24,39,0.45) 60%, rgba(17,24,39,0.85) 100%);
+      }
+      .hero-inner{
+        position: relative; z-index: 1;
+        text-align: center;
+        padding: 2rem; max-width: 980px; width: 100%;
+      }
+      .badge { display:inline-flex; gap:.5rem; align-items:center; background:#0b1220bb; border:1px solid #1f2a44; padding:.4rem .7rem; border-radius:999px; font-size:.85rem; color:#93c5fd }
+      .title{ font-weight:800; font-size: clamp(2rem, 5vw, 3.25rem); margin:.75rem 0 0 }
+      .subtitle{ color:#cbd5e1; font-weight:400; margin:.35rem 0 0; letter-spacing:.2px }
+
+      /* Layout */
+      .container { width: min(1100px, 92vw); margin: 2.5rem auto; display: grid; gap: 2rem; }
+      section.panel {
+        background: linear-gradient(180deg, #0f1626 0%, #0e1524 100%);
+        border: 1px solid #1f2937;
+        border-radius: var(--radius);
+        padding: clamp(1.2rem, 3vw, 1.6rem);
+        box-shadow: 0 10px 30px rgba(0,0,0,.25), inset 0 1px rgba(255,255,255,.03);
+      }
+      .panel h2 { margin: 0 0 0.6rem; font-size: clamp(1.2rem, 2.4vw, 1.4rem); letter-spacing:.3px }
+      .muted { color: var(--muted); font-size: .95rem; }
+
+      /* Profile text */
+      .profile {
+        display: grid; gap: 1rem; grid-template-columns: 1fr; line-height: 1.7;
+      }
+      .profile p { margin: 0; }
+
+      /* Video */
+      .video-wrap { position: relative; aspect-ratio: 16/9; border-radius: 14px; overflow: hidden; border: 1px solid #1f2937; background:#000; }
+      .video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; }
+
+      /* Gallery */
+      .gallery { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+      figure.card { position: relative; margin: 0; border-radius: 14px; overflow: hidden; border:1px solid #1f2937; background:#0b0f14; }
+      figure.card img { width: 100%; height: 240px; object-fit: cover; display:block; filter: saturate(1.05) contrast(1.02); transition: transform .45s ease, filter .45s ease; }
+      figure.card::after { /* subtle gradient edge */
+        content:""; position:absolute; inset:0; pointer-events:none; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+      }
+      figure.card:hover img { transform: scale(1.04); filter: saturate(1.2) contrast(1.05); }
+      figcaption {
+        position: absolute; inset: auto 0 0; padding: .8rem 1rem; background: linear-gradient(180deg, rgba(2,6,23,0) 0%, rgba(2,6,23,0.72) 60%, rgba(2,6,23,0.9) 100%);
+        transform: translateY(60%); opacity: 0; transition: all .35s ease; color: #e5e7eb; font-weight: 600; letter-spacing:.15px;
+      }
+      figure.card:hover figcaption { transform: translateY(0); opacity: 1; }
+      .tag { position:absolute; top:10px; left:10px; background:#0b1220d0; border:1px solid #1f2a44; padding:.25rem .55rem; font-size:.8rem; border-radius:999px; color:#bfdbfe }
+
+      /* Footer */
+      footer { color:#9ca3af; text-align:center; padding: 3rem 1rem; }
+
+      /* Small helper grid for grouping */
+      .two-col { display:grid; gap:1rem; grid-template-columns: 1fr; }
+      @media (min-width: 880px) { .two-col { grid-template-columns: 1.2fr .8fr; } }
+    </style>
+  </head>
+  <body>
+    <header class="hero" role="banner" aria-label="Foto de cabecera">
+      <div class="hero-inner">
+        <span class="badge" aria-label="Identidad">Yale · Español · Presentación</span>
+        <h1 class="title">Eugene · Página Personal</h1>
+        <p class="subtitle">Perfil, video y galería para la conversación en clase</p>
+      </div>
+    </header>
+
+    <main class="container" id="contenido">
+      <!-- Perfil -->
+      <section class="panel two-col" id="perfil" aria-labelledby="perfil-title">
+        <div>
+          <h2 id="perfil-title">Perfil</h2>
+          <p class="muted">Párrafos breves y cohesivos</p>
+          <div class="profile">
+            <p>
+              Hola! Me llamo Eugene, o Eugenio en español. Soy de Cambridge, Massachusetts, un pueblo muy pintoresco. Ahora, vivo en New Haven, Connecticut, porque estudio en la universidad de Yale. Tengo una personalidad muy fácil y me gusta pensar que tengo un buen sentido del humor. En verano, vivo en corea con mis padres: mi madre y mi padre. Se llaman Sujung y Byung Il. Son muy simpáticos y siempre quiero la mejor educación para mi. Me encanta ver películas de acción con ellos. En Yale, me interesa la arquitectura y la música. Soy un musicion de las diez anos pero estudio en Yale porque quiero una educación que es muy diversidad. Me fascina la clase de historia de la arquitectura! Me veo como arquitecta en el futuro. Cuando no estoy en mis clases, soy una flautista en la Orquesta Sinfónica de Yale. Soy un nadador en el club de natación también. En el fin de semana, me gusta ir de excursión con mis amigos en el “Yale Outdoors” club!
+            </p>
+          </div>
+        </div>
+        <div>
+          <h2 id="video-title">Video (30s)</h2>
+          <p class="muted">Lo que me hace único</p>
+          <div class="video-wrap" role="region" aria-labelledby="video-title">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/dV5mN5vqIbM?si=5yB6xZfntZ4IAVSj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- Galería: Identidad y gustos -->
+      <section class="panel" id="galeria-1" aria-labelledby="galeria-1-title">
+        <h2 id="galeria-1-title">Imágenes · Identidad y gustos</h2>
+        <p class="muted">Pasa el cursor por cada imagen para ver la frase corta (estilo Avancemos/¡Avancemos!/Aventura vocab).</p>
+        <div class="gallery" role="list">
+          <figure class="card" role="listitem">
+            <span class="tag">¿Quién soy?</span>
+            <img src="./who_I_am.png" alt="Un objeto o paisaje que refleja mi personalidad" loading="lazy" />
+            <figcaption>Soy creativo y amigable.</figcaption>
+          </figure>
+          <figure class="card" role="listitem">
+            <span class="tag">Yale</span>
+            <img src="./favorite_yale.jpeg" alt="Mi lugar favorito en Yale" loading="lazy" />
+            <figcaption>Mi lugar favorito en Yale.</figcaption>
+          </figure>
+          <figure class="card" role="listitem">
+            <span class="tag">New Haven</span>
+            <img src="./favorite_nh.jpg" alt="Mi lugar favorito en New Haven" loading="lazy" />
+            <figcaption>Mi lugar favorito en New Haven.</figcaption>
+          </figure>
+          <figure class="card" role="listitem">
+            <span class="tag">Persona</span>
+            <img src="./favorite_person.jpeg" alt="Mi persona favorita en Yale" loading="lazy" />
+            <figcaption>Mi persona favorita en Yale.</figcaption>
+          </figure>
+          <figure class="card" role="listitem">
+            <span class="tag">Película</span>
+            <img src="./good_will_hunting.jpg" alt="Una película que me gusta" loading="lazy" />
+            <figcaption>Me gusta esta película.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Galería: Rutina diaria -->
+      <section class="panel" id="galeria-2" aria-labelledby="galeria-2-title">
+        <h2 id="galeria-2-title">Rutina diaria</h2>
+        <p class="muted">Mañana · Tarde · Noche</p>
+        <div class="gallery" role="list">
+          <figure class="card" role="listitem">
+            <span class="tag">Mañana</span>
+            <img src="./manana.jpeg" alt="Por la mañana" loading="lazy" />
+            <figcaption>Por la mañana, estudio.</figcaption>
+          </figure>
+          <figure class="card" role="listitem">
+            <span class="tag">Tarde</span>
+            <img src="./afternoon.jpeg" alt="Por la tarde" loading="lazy" />
+            <figcaption>Por la tarde, nado.</figcaption>
+          </figure>
+          <figure class="card" role="listitem">
+            <span class="tag">Noche</span>
+            <img src="./night.jpg" alt="Por la noche" loading="lazy" />
+            <figcaption>Por la noche, leo.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Galería: Fin de semana -->
+      <section class="panel" id="galeria-3" aria-labelledby="galeria-3-title">
+        <h2 id="galeria-3-title">Actividades del fin de semana</h2>
+        <p class="muted">Viernes · Sábado · Domingo</p>
+        <div class="gallery" role="list">
+          <figure class="card" role="listitem">
+            <span class="tag">Viernes</span>
+            <img src="./friday.jpeg" alt="El viernes" loading="lazy" />
+            <figcaption>El viernes, salgo con amigos.</figcaption>
+          </figure>
+          <figure class="card" role="listitem">
+            <span class="tag">Sábado</span>
+            <img src="./sabado.jpeg" alt="El sábado" loading="lazy" />
+            <figcaption>El sábado, practico la flauta.</figcaption>
+          </figure>
+          <figure class="card" role="listitem">
+            <span class="tag">Domingo</span>
+            <img src="./domingo.jpeg" alt="El domingo" loading="lazy" />
+            <figcaption>El domingo, descanso.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="accesibilidad-title">
+        <h2 id="accesibilidad-title">Notas de acceso y uso de imágenes</h2>
+        <ul class="muted">
+          <li>Incluye tus fotos en la misma carpeta que este archivo y usa los nombres: <code>headshot.jpg</code>, <code>who_I_am.png</code>, <code>favorite_yale.jpeg</code>, <code>favorite_nh.jpg</code>, <code>favorite_person.jpeg</code>, <code>good_will_hunting.jpg</code>, <code>manana.jpeg</code>, <code>afternoon.jpeg</code>, <code>night.jpg</code>, <code>friday.jpeg</code>, <code>sabado.jpeg</code>, <code>domingo.jpeg</code>.</li>
+          <li>Si usas fotos ajenas, añade una pequeña línea con la atribución y licencia Creative Commons debajo de la galería o en el pie de página.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Hecho para la presentación en clase – Yale. Imágenes y video para uso educativo. Añade atribuciones CC cuando corresponda.</p>
+    </footer>
+  </body>
+</html>
