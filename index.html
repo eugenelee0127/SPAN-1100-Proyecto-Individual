@@ -86,18 +86,53 @@
   </style>
 </head>
 <body>
-  <header class="hero" role="banner" aria-label="Foto de cabecera">
-    <div class="hero-media" aria-hidden="true">
-      <picture>
-        <img src="./headshot.jpg" alt="" fetchpriority="high" width="1600" height="900" />
-      </picture>
-      <div class="hero-vignette"></div>
+  <header class="hero" role="banner" aria-label="Foto de cabecera" style="
+    position: relative;
+    height: 100vh; /* full viewport height */
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    border-bottom: 1px solid #1f2937;
+  ">
+    <div class="hero-media" aria-hidden="true" style="
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    ">
+      <img src="./headshot.jpg" alt="" style="
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top; /* keep more of your face visible */
+        filter: brightness(0.7) saturate(1.05);
+      ">
     </div>
-    <div class="hero-inner">
-      <span class="badge" aria-label="Identidad">Otoño SPAN 1100 sección 10</span>
-      <h1 class="title">Eugene Lee</h1>
-      <p class="subtitle">estudiante de la Universidad de Yale</p>
+
+    <div class="hero-inner" style="
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      color: #e5e7eb;
+      background: linear-gradient(180deg, rgba(11,15,20,0) 40%, rgba(11,15,20,0.8) 90%);
+    ">
+      <span class="badge" style="
+        display: inline-block;
+        background: rgba(0,0,0,0.45);
+        border: 1px solid rgba(255,255,255,0.2);
+        padding: .4rem .8rem;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        color: #cbe1ff;
+      ">
+        Otoño SPAN 1100 sección 10
+      </span>
+      <h1 style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; margin-top: 0.8rem;">Eugene Lee</h1>
+      <p style="font-size: 1.1rem; color: #dbe3ec; margin-top: 0.4rem;">estudiante de la Universidad de Yale</p>
     </div>
+  </header>
+  
   </header>
 
   <main class="container" id="contenido">
