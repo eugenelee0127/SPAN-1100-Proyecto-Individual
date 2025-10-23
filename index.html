@@ -136,7 +136,7 @@
             border-radius: 999px;
             font-size: 0.85rem;
             color: #cbe1ff;
-          ">Otoño SPAN 1100 sección 10</span>
+          ">SPAN 1100 Otoño 2025 Sección 10</span>
 
           <h1 style="
             font-size: clamp(2.5rem, 4vw, 3.2rem);
@@ -194,38 +194,84 @@
     <!-- Galería: Identidad y gustos -->
     <section class="panel" id="galeria-1" aria-labelledby="galeria-1-title">
       <h2 id="galeria-1-title">Imágenes · Identidad y gustos</h2>
-      <div class="gallery" role="list">
+
+      <!-- 3 on top, 2 centered below -->
+      <div class="gallery grid-3-2" role="list" style="
+        display:grid;
+        grid-template-columns: repeat(3, minmax(260px, 1fr));
+        gap: 16px;
+        align-items:start;
+      ">
         <figure class="card" role="listitem" data-orient="portrait">
           <span class="tag">¿Quién soy?</span>
-          <div class="media"><img class="landscape" src="./who_I_am.PNG" alt="Un objeto o paisaje que refleja mi personalidad" loading="lazy" width="1200" height="800"></div>
+          <div class="media" style="position:relative; width:100%; aspect-ratio:3/4; overflow:hidden; border-radius:12px;">
+            <img src="./who_I_am.PNG" alt="Un objeto o paisaje que refleja mi personalidad"
+                style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;">
+          </div>
           <figcaption>Me encanta mi sección de flauta de la orquesta.</figcaption>
         </figure>
 
-        <figure class="card" role="listitem" data-orient="portrait">
+        <figure class="card" role="listitem" data-orient="landscape">
           <span class="tag">Yale</span>
-          <div class="media"><img class="landscape" src="./favorite_yale.jpeg" alt="Mi lugar favorito en Yale" loading="lazy" width="1400" height="900"></div>
+          <div class="media" style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:12px;">
+            <img src="./favorite_yale.jpeg" alt="Mi lugar favorito en Yale"
+                style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;">
+          </div>
           <figcaption>Mi lugar favorito en Yale.</figcaption>
         </figure>
 
-        <figure class="card" role="listitem" data-orient="portrait">
+        <figure class="card" role="listitem" data-orient="landscape">
           <span class="tag">New Haven</span>
-          <div class="media"><img class="portrait" src="./favorite_nh.JPG" alt="Mi lugar favorito en New Haven" loading="lazy" width="900" height="1200"></div>
+          <div class="media" style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:12px;">
+            <img src="./favorite_nh.JPG" alt="Mi lugar favorito en New Haven"
+                style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;">
+          </div>
           <figcaption>Mi lugar favorito en New Haven.</figcaption>
         </figure>
 
         <figure class="card" role="listitem" data-orient="portrait">
           <span class="tag">Persona</span>
-          <div class="media"><img class="portrait" src="./favorite_person.jpeg" alt="Mi persona favorita en Yale" loading="lazy" width="900" height="1200"></div>
+          <div class="media" style="position:relative; width:100%; aspect-ratio:3/4; overflow:hidden; border-radius:12px;">
+            <img src="./favorite_person.jpeg" alt="Mi persona favorita en Yale"
+                style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;">
+          </div>
           <figcaption>Mi persona favorita en Yale.</figcaption>
         </figure>
 
         <figure class="card" role="listitem" data-orient="portrait">
           <span class="tag">Película</span>
-          <div class="media"><img class="portrait" src="./good_will_hunting.jpg" alt="Una película que me gusta" loading="lazy" width="900" height="1200"></div>
+          <div class="media" style="position:relative; width:100%; aspect-ratio:3/4; overflow:hidden; border-radius:12px;">
+            <img src="./good_will_hunting.jpg" alt="Una película que me gusta"
+                style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;">
+          </div>
           <figcaption>Me gusta esta película.</figcaption>
         </figure>
       </div>
+
+      <!-- Placement + responsive: keeps 3/2 layout; removes awkward gaps -->
+      <style>
+        /* Put item 4 into middle column; item 5 into right column */
+        #galeria-1 .grid-3-2 > figure:nth-child(4){ grid-column: 2; }
+        #galeria-1 .grid-3-2 > figure:nth-child(5){ grid-column: 3; }
+
+        /* Tablet: 2 columns, natural flow */
+        @media (max-width: 980px){
+          #galeria-1 .grid-3-2{
+            grid-template-columns: repeat(2, minmax(220px, 1fr)) !important;
+          }
+          #galeria-1 .grid-3-2 > figure:nth-child(4),
+          #galeria-1 .grid-3-2 > figure:nth-child(5){
+            grid-column: auto;
+          }
+        }
+
+        /* Phone: single column */
+        @media (max-width: 560px){
+          #galeria-1 .grid-3-2{ grid-template-columns: 1fr !important; }
+        }
+      </style>
     </section>
+
 
     <!-- Galería: Rutina diaria -->
     <section class="panel" id="galeria-2" aria-labelledby="galeria-2-title">
